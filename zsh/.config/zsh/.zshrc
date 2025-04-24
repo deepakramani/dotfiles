@@ -60,3 +60,5 @@ if [ -f '/Users/dross/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/dross/goo
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/dross/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/dross/google-cloud-sdk/completion.zsh.inc'; fi
 
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+export PATH='/Users/dross/.duckdb/cli/latest':$PATH
