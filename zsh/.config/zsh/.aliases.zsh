@@ -30,6 +30,7 @@ alias add='git add'
 alias addup='git add -u'
 alias addall='git add .'
 alias branch='git branch'
+alias branches='git branch -a'
 alias checkout='git checkout'
 alias bcheckout='git checkout -b'
 alias clone='git clone'
@@ -66,6 +67,9 @@ alias dc='docker-compose'
 alias ppi='pipenv install'
 alias pps='pipenv shell'
 
+# kitty terminal emulator
+alias icat='kitty icat'
+alias filediff='git difftool --no-symlinks --dir-diff'
 
 # for mac
 alias showfiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
