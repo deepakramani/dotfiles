@@ -6,3 +6,4 @@ undodir/
 .zsh_history
 .zsh_sessions/
 .zsh_plugins.zsh
+nvim/.config/nvim1/
