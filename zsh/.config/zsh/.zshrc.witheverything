@@ -1,0 +1,296 @@
+# This file has every setting which is usually separated into multiple files
+
+###############################
+# EXPORT ENVIRONMENT VARIABLE #
+###############################
+export DOTFILES="$HOME/.dotfiles"
+
+export XDG_CONFIG_HOME="$HOME/.config"
+
+# Uncomment if you want to change the default zsh directory from $HOME
+# export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+# alternate way to define variables
+# export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+# export ZDOTDIR=${ZDOTDIR:-$HOME/.config/zsh}
+
+#refer these links to see how PATHS are defined. 
+#https://github.com/belak/dotfiles/blob/main/zshenv
+#https://github.com/mattmc3/dotfiles/blob/main/.config/zsh/.zshenv
+
+# ---- path variables -----
+export PATH=/opt/homebrew/sbin:$PATH
+export PATH=/opt/homebrew/bin:$PATH
+export PATH=/Users/dross/texlive/2025/bin/universal-darwin:$PATH
+export MANPATH=/Users/dross/texlive/2025/texmf-dist/doc/man:$MANPATH
+export INFOPATH=Users/dross/texlive/2025/texmf-dist/doc/info:$INFOPATH
+
+export PATH=/Users/dross/Downloads/platform-tools:$PATH
+export PATH=/opt/homebrew/opt/curl/bin:$PATH
+export PATH='/Users/dross/.duckdb/cli/latest':$PATH
+
+
+#Disable homebrew auto-update
+export HOMEBREW_NO_AUTO_UPDATE=1
+
+#dbt config
+export DBT_PROFILES_DIR=~/.config/.dbt/
+
+
+# Load cargo env if available
+if [[ -f "$HOME/.cargo/env" ]]; then source "$HOME/.cargo/env"; fi
+
+
+# Set any helper functions used by your antidote config.
+function is-macos() {
+  [[ $OSTYPE == darwin* ]]
+}
+
+ZSH_THEME="mytheme" # assign theme for OMZ to pick up the theme. Place the theme file in .oh-my-zsh/custom/themes/
+
+# Uncomment the following line to disable omz bi-weekly auto-update checks.
+DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to automatically omz update without prompting.
+DISABLE_UPDATE_PROMPT="true"
+
+#Initialise OMZ. Download OMZ and Uncomment below if omz needs to be used.
+if [ -f $HOME/.oh-my-zsh/oh-my-zsh.sh ]; then
+    source $ZSH/oh-my-zsh.sh
+fi
+
+
+#Prevent history from storing secrets, keys. Start with a space before the command to make history ignore it.
+export HIST_IGNORE="(ls*|cat*|*AWS*|*SECRET*|*KEY*|*PASS*|*DBT_*|*SNOWFLAKE_*)"
+setopt HIST_IGNORE_SPACE
+
+# Next 2 lines are used in combination with ez-compinit plugin
+# zstyle ':plugin:ez-compinit' 'compstyle' 'zshzoo'
+# zstyle ':plugin:ez-compinit' 'use-cache' 'yes'
+
+# Activate antidote for zsh plugins. Refer https://getantidote.github.io/install
+source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+
+# $ZDOTDIR is defined in ~/.zshenv file. Default value of ZDOTDIR is ~/$HOME
+if [ -f $ZDOTDIR/.zsh_plugins.txt ]; then
+    # initialise plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
+    antidote load
+fi
+
+#to know antidote home, use `antidote home`
+#to clear out zsh plugins, use `rm -rf $(antidote home) && rm ~/.zsh_plugins.zsh`
+#to list installed plugins, use `antidote list`
+#to update plugins, use `antidote update`
+
+# Completion for kitty
+kitty + complete setup zsh | source /dev/stdin
+export OPENSSL_ROOT_DIR=/opt/homebrew/opt/openssl@1.1
+
+# complete -o nospace -C /opt/homebrew/bin/terraform terraform
+# autoload -U +X bashcompinit && bashcompinit
+autoload -Uz compinit; compinit
+
+# for zsh-history-search plugin. Movement setting.
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
+
+# >>> conda initialise >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/dross/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then eval "$__conda_setup"
+else
+    if [ -f "/Users/dross/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/Users/dross/miniforge3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/dross/miniforge3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
+if [ -f "/Users/dross/miniforge3/etc/profile.d/mamba.sh" ]; then
+    . "/Users/dross/miniforge3/etc/profile.d/mamba.sh"
+fi
+# <<< conda initialise <<<
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/dross/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/dross/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/dross/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/dross/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+# ---- Aliases -----
+alias szsh='subl ~/.config/zsh/.zshrc'
+alias vzsh='vim ~/.config/zsh/.zshrc'
+alias zsh='source ~/.config/zsh/.zshrc'
+alias vzshp='vim ~/.config/zsh/.zsh_plugins.txt'
+alias vzsha='vim ~/.config/zsh/.aliases.zsh'
+alias vtheme='vim ~/.config/zsh/zsh_custom_themes/mytheme.zsh-theme'
+alias ll="ls -lahF" # lists in long form including hidden files and human readable size format while appending entries.
+alias lt="ls -latrh" # sorted list w.r.t time reverse and size in human readable format with appended entries.
+alias l="ls -lah" # back up to ll to allow for typo.
+alias lS='ls -lahFSr' # prints list in the reverse order of size in long form including hidden files.
+alias lart='ls -1Fcart'
+alias lrt='ls -1Fcrt'
+
+alias cd..="cd .."
+alias cd2.="cd ../.."
+alias cd3.="cd ../../.."
+alias cd4.="cd ../../../.."
+alias py="python3"
+alias vim="nvim"
+alias cls='clear' 
+
+# confirm before overwriting something
+alias cp="cp -i"
+alias mv='mv -i'
+alias rm='rm -i'
+
+# git
+alias add='git add'
+alias addup='git add -u'
+alias addall='git add .'
+alias branch='git branch'
+alias branches='git branch -a'
+alias checkout='git checkout'
+alias bcheckout='git checkout -b'
+alias clone='git clone'
+alias commit='git commit -m'
+alias fetch='git fetch'
+alias pull='git pull origin'
+alias push='git push -u origin'
+alias status='git status'
+alias tag='git tag'
+alias newtag='git tag -a'
+alias glog='git log --oneline --graph --decorate'
+alias glg="git log --graph --pretty=format:'%Cred%h%Creset %an -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
+
+alias grep='grep --color'
+alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS} '
+alias tmux='tmux -u'
+
+# from aws
+alias ce='conda env list'
+alias ca='conda activate'
+alias ma='mamba activate'
+alias cad='conda deactivate'
+alias mad='mamba deactivate'
+alias cc='conda create -n'
+alias tmux='tmux -u'
+alias jn='jupyter notebook'
+alias nvd='nvidia-smi'
+alias nvdw='watch -n 1 nvidia-smi'
+
+# for docker-compose
+alias dc='docker-compose'
+
+# for pipenv
+alias ppi='pipenv install'
+alias pps='pipenv shell'
+
+# kitty terminal emulator
+alias icat='kitty icat'
+alias filediff='git difftool --no-symlinks --dir-diff'
+
+# for mac
+alias showfiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+alias hidefiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+
+#vlc
+alias vlc="/Applications/VLC.app/Contents/MacOS/VLC"
+mkcdir ()
+{
+    mkdir -p -- "$1" &&
+      cd -P -- "$1"
+}
+
+alias mc='make connections'
+alias mtc='make test-connections'
+alias dpsa='docker ps -a'
+alias di='docker images'
+alias direm='docker image rm'
+alias dexec='docker exec -it'
+alias dell='rm -f data/*.csv'
+alias delt='rm -rf test_minio/ test_psql_vol/'
+
+# export POSTGRES_USER=postgres
+# export POSTGRES_PASSWORD=postgres
+# export POSTGRES_DB=ecomm-db
+# export POSTGRES_HOST=postgres
+# export DB_SCHEMA=commerce
+
+export TEST_POSTGRES_USER=test_postgres
+export TEST_POSTGRES_PASSWORD=test_postgres
+export TEST_POSTGRES_DB=test_cdc-demo-db
+export TEST_POSTGRES_HOST=test_postgres
+
+export TEST_DB_SCHEMA=commerce
+
+export TEST_AWS_KEY_ID=test_minio
+export TEST_AWS_SECRET_KEY=test_minio123
+export TEST_AWS_BUCKET_NAME=commerce
+
+
+
+#####--------.zsh_plugins.txt contents---------#####
+
+# If you use Oh-My-Zsh with antidote, load this plugin FIRST to set things up so you
+# don't have to worry about whether OMZ will work correctly. https://github.com/getantidote/use-omz
+# getantidote/use-omz
+
+# for zsh functions. https://github.com/mattmc3/zfunctions
+## mattmc3/zfunctions
+
+# initialise zsh completion system(compinit). https://github.com/mattmc3/ez-compinit
+# mattmc3/ez-compinit
+
+# Use all of Oh My Zsh's lib directory. needed as custom theme misbehaves with colouring.
+# ohmyzsh/ohmyzsh path:lib
+
+# zsh-completions and suggestions
+# zsh-users/zsh-completions kind:fpath path:src
+# zsh-users/zsh-autosuggestions
+
+# for history search
+# zsh-users/zsh-history-substring-search
+
+# for syntax highlighting
+# zdharma-continuum/fast-syntax-highlighting
+
+# coloured man pages
+# ohmyzsh/ohmyzsh path:plugins/colored-man-pages
+
+# display useful error messages
+# ohmyzsh/oh-my-zsh path:plugins/command-not-found
+
+# For file extraction
+# ohmyzsh/ohmyzsh path:plugins/extract
+
+# To navigate directories faster
+# agkozak/zsh-z
+
+# load my custom theme
+# ${ZDOTDIR:-$HOME}/zsh_custom_themes/colours.zsh
+# ${ZDOTDIR:-$HOME}/zsh_custom_themes/mytheme.zsh-theme
+
+# load my command aliases
+# ${ZDOTDIR:-$HOME}/.aliases.zsh
+
+# aliases for brew commands
+# ohmyzsh/ohmyzsh path:plugins/brew conditional:is-macos
+
+# aliases for docker-compose
+## ohmyzsh/ohmyzsh path:plugins/docker-compose
+
+# aliases for kind k8s cluster
+## ohmyzsh/ohmyzsh path:plugins/kind
+
+# aliases for kubectl
+## ohmyzsh/ohmyzsh path:plugins/kubectl
+
+# aliases for pipenv
+## ohmyzsh/ohmyzsh path:plugins/pipenv
+
+#######--------------------------##############
