@@ -105,7 +105,8 @@ Helpful resource - https://www.jakewiesler.com/blog/managing-dotfiles
 Stow ignore - https://unix.stackexchange.com/questions/121910/gnu-stow-how-to-stow-only-selected-files-folders
 
 ## Tree command for directory tree
-A pretty awesome tool to display a directory's tree structure. See [here](http://mama.indstate.edu/users/ice/tree/index.html)  
+A pretty awesome tool to display a directory's tree structure. See [here](https://github.com/Old-Man-Programmer/tree)  
+
 
 ```bash
 brew install tree #for mac
@@ -228,12 +229,28 @@ brew install hashicorp/tap/terraform
 
 ## Latex Installation
 
-- Goto this link — https://www.tug.org/texlive/acquire-netinstall.html, download uni-tar.gz file(ca. 5 mb).
-- Cd into the folder and run install-tl script. GUI doesn’t work well in dark mode. Switch to light mode. Follow instructions. 
-- Change install folder prefix to home directory to avoid permissions.
-- Click advanced, In “N.of collections”, click “customise” and choose necessary package and click install. Install will take about 30 mins.
-- There is also Mactex(https://www.tug.org/mactex/mactex-download.html) which contains all the packages. About 7gb big. Didn’t install. 
+2025 update(takes 1-2hours totally. Use profile to save time)
 
-export PATH=/usr/dross/texlive/2022/bin/universal-darwin:$PATH
-export MANPATH=/usr/dross/texlive/2022/texmf-dist/doc/man:$MANPATH
-export INFOPATH=usr/dross/texlive/2022/texmf-dist/doc/info:$INFOPATH
+(For quick install using the texlive.profile file. `./install-tl -profile texlive.profile`)
+
+- Before upgrading to 2025 version, check previous version present inside home directory `~/texlive/{year}`
+- Instructions for upgrade are given here - https://www.tug.org/texlive/upgrade.html (upgrade seems little technical. Didn’t proceed.)
+- Instructions for fresh install are given here - https://www.tug.org/texlive/quickinstall.html (perl install-tl -gui). Version 74223.
+- Goto this link — https://www.tug.org/texlive/acquire-netinstall.html, download unx-tar.gz file(ca. 5 mb).
+- change install folder prefix to home directory to avoid permissions.
+- change installation root to `/Users/dross/texlive/2025`(Choose prefix `/Users/dross/`, leave rest as it is and click OK). Go back again to see that the path is correct.(will create `2025` on its own). Will show some 9GB big files to install. No need for those.
+- Click `advanced`.  (use the installation save profile option to use for next upgrade).
+    - Leave `texmf-local` localtion as it is. It is for custom local files not to be overwritten by Tex live upgrade. 
+    - In ‘platforms’, make sure only mac is selected. 
+    - ‘Selections’ is the most important.
+        - Need to change ‘Schema’ to only needed packages. Click ‘Change’, choose ‘custom schema’.
+        - In ’N.of Collections’, click ‘customise’. Select ‘None’ in languages and select only English.
+            - In ‘other collections’ - select ‘None’ and choose only needed. (I saved texlive.profile). Use that for later.
+            - In short, languages- English and German, all latex, luatex, xetex, basic fonts and packages. about 725MB.
+    - In Options, deselect everything. No need for docs or source tree. Use google or LLM. Also no need for symlinks. Put PATH, MANPATH and INFOPATH in `.zshenv`.
+- Save profile or click install. I think source as CTAN is automatically selected. Install takes around 20 mins to complete depending on the server. 
+
+
+export PATH=/usr/dross/texlive/2025/bin/universal-darwin:$PATH
+export MANPATH=/usr/dross/texlive/2025/texmf-dist/doc/man:$MANPATH
+export INFOPATH=usr/dross/texlive/2025/texmf-dist/doc/info:$INFOPATH
