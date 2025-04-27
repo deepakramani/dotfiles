@@ -54,11 +54,15 @@ if [ -f "/Users/dross/miniforge3/etc/profile.d/mamba.sh" ]; then
 fi
 # <<< conda initialise <<<
 
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+export PATH='/Users/dross/.duckdb/cli/latest':$PATH
+export PATH="$(brew --prefix git)/bin:$PATH"
+export GOOGLE_APPLICATION_CREDENTIALS="/Users/dross/.ssh/dbt_bikeshop_insights/learn-apache-443615-88e9cafab79f.json"
+
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/dross/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/dross/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/dross/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/dross/google-cloud-sdk/completion.zsh.inc'; fi
 
-export PATH="/opt/homebrew/opt/curl/bin:$PATH"
-export PATH='/Users/dross/.duckdb/cli/latest':$PATH
