@@ -2,8 +2,8 @@
 alias szsh='subl ~/.config/zsh/.zshrc'
 alias vzsh='vim ~/.config/zsh/.zshrc'
 alias zsh='source ~/.config/zsh/.zshrc'
-alias vzshp='vim ~/.config/zsh/.zsh_plugins.txt'
-alias vzsha='vim ~/.config/zsh/.aliases.zsh'
+alias vplugins='vim ~/.config/zsh/.zsh_plugins.txt'
+alias valias='vim ~/.config/zsh/.aliases.zsh'
 alias vtheme='vim ~/.config/zsh/zsh_custom_themes/mytheme.zsh-theme'
 alias ll="ls -lahF" # lists in long form including hidden files and human readable size format while appending entries.
 alias lt="ls -latrh" # sorted list w.r.t time reverse and size in human readable format with appended entries.
@@ -19,6 +19,7 @@ alias cd4.="cd ../../../.."
 alias py="python3"
 alias vim="nvim"
 alias cls='clear' 
+alias owd='pwd'
 
 # confirm before overwriting something
 alias cp="cp -i"
@@ -59,6 +60,18 @@ alias tmux='tmux -u'
 alias jn='jupyter notebook'
 alias nvd='nvidia-smi'
 alias nvdw='watch -n 1 nvidia-smi'
+
+# for gcp
+alias gcl='gcloud'
+
+# for opentofu
+alias tf='tofu'
+alias tfi='tofu init'
+alias tfp='tofu plan'
+alias tfa='tofu apply'
+alias tfaa='tofu apply -auto-approve'
+alias tfd='tofu destroy'
+alias tfdocs='terraform-docs markdown table . > README_tf.md'
 
 # for docker-compose
 alias dc='docker-compose'
