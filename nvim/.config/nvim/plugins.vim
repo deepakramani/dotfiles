@@ -114,8 +114,7 @@ lua require('deepak.surround')
 set conceallevel=1
 let g:tex_conceal='abdgms'
 let g:vimtex_compiler_latexmk = {'out_dir' : 'build'}
-" let g:vimtex_compiler_latexmk_engines = {'xelatex': '-xelatex'}
-" let g:vimtex_compiler_latexrun_engines ={'xelatex':'xelatex'}
+let g:vimtex_compiler_latexmk_engines = {'xelatex': '-xelatex'}
 
 " the next 2 commands supresses quickfix window not to 
 "pop up when there are only warnings and no error. Also
