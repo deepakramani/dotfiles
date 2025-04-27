@@ -19,9 +19,9 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 # ---- path variables -----
 export PATH=/opt/homebrew/sbin:$PATH
 export PATH=/opt/homebrew/bin:$PATH
-export PATH=/Users/dross/texlive/2022/bin/universal-darwin:$PATH
-export MANPATH=/Users/dross/texlive/2022/texmf-dist/doc/man:$MANPATH
-export INFOPATH=Users/dross/texlive/2022/texmf-dist/doc/info:$INFOPATH
+export PATH=/Users/dross/texlive/2025/bin/universal-darwin:$PATH
+export MANPATH=/Users/dross/texlive/2025/texmf-dist/doc/man:$MANPATH
+export INFOPATH=Users/dross/texlive/2025/texmf-dist/doc/info:$INFOPATH
 
 export PATH=/Users/dross/Downloads/platform-tools:$PATH
 export PATH=/opt/homebrew/opt/curl/bin:$PATH
