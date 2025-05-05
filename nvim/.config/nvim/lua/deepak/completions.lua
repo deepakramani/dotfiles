@@ -90,6 +90,7 @@ cmp.setup{
         pandoc_references = "[ref]",
         buffer = "[Buffer]",
         path = "[Path]",
+        cmd_line="[cmd_line]"
       })[entry.source.name]
       return vim_item
     end,
@@ -113,6 +114,26 @@ cmp.setup{
     },
     require("luasnip.loaders.from_vscode").lazy_load()
 }
+
+-- Cmdline completion for ':'
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  }),
+  matching = { disallow_symbol_nonprefix_matching = false }
+})
+
+-- Cmdline completion for '/' and '?'
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect,noinsert'

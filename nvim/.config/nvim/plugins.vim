@@ -71,6 +71,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'hrsh7th/cmp-nvim-lsp' " -- LSP source for nvim-cmp
     Plug 'hrsh7th/cmp-buffer' " -- buffer completion
     Plug 'hrsh7th/cmp-path' " -- path completion
+    Plug 'hrsh7th/cmp-cmdline' " -- cmd line completion
     Plug 'saadparwaiz1/cmp_luasnip' " -- snippet compeletion
     Plug 'jmbuhr/cmp-pandoc-references'
 
