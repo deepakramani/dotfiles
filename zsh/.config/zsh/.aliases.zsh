@@ -76,6 +76,13 @@ alias tfdocs='terraform-docs markdown table . > README_tf.md'
 # for docker-compose
 alias dc='docker-compose'
 
+#for airflow/astro
+alias adl='airflow dags list'
+alias ads='astro dev start'
+alias adst='astro dev stop'
+alias adbs='astro dev bash'
+alias adps='astro dev ps'
+
 # for pipenv
 alias ppi='pipenv install'
 alias pps='pipenv shell'
